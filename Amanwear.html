@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AmanWear — Affordable Streetwear</title>
+  <style>
+    :root{--accent:#111827;--muted:#6b7280;--glass:rgba(255,255,255,0.06);font-family:Inter,Segoe UI,Roboto,Arial}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#f8fafc,#eef2ff);color:#0f172a}
+    .container{max-width:1000px;margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#111827,#374151);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+    h1{margin:0;font-size:20px}
+    p.lead{margin:0;color:var(--muted);font-size:13px}
+    .hero{background:linear-gradient(90deg,rgba(99,102,241,0.08),rgba(99,102,241,0.02));padding:18px;border-radius:12px;margin-top:16px;display:flex;gap:18px;align-items:center}
+    .hero .left{flex:1}
+    .hero .cta{display:flex;gap:8px;margin-top:12px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:9px;border:0;cursor:pointer;font-weight:600}
+    .ghost{background:transparent;border:1px solid rgba(15,23,42,0.08);padding:10px 12px;border-radius:9px;color:var(--accent);cursor:pointer}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px}
+    .card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(15,23,42,0.06);display:flex;flex-direction:column}
+    .img{height:220px;border-radius:10px;background:linear-gradient(180deg,#f3f4f6,#e6eefb);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted)}
+    .meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+    .name{font-weight:700}
+    .price{font-weight:800}
+    .actions{display:flex;gap:8px;margin-top:12px}
+    .small{padding:8px 10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:transparent;cursor:pointer}
+
+    footer{margin-top:22px;padding:14px;border-radius:10px;background:linear-gradient(180deg,#fff, #fbfdff);display:flex;align-items:center;justify-content:space-between}
+    .cart-summary{display:flex;gap:12px;align-items:center}
+    .cart-count{background:#ef4444;color:#fff;padding:6px 8px;border-radius:8px;font-weight:700}
+
+    /* responsive */
+    @media(max-width:520px){.hero{flex-direction:column;align-items:flex-start}.img{height:160px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">AW</div>
+        <div>
+          <h1>AmanWear</h1>
+          <p class="lead">Affordable streetwear — Denim jackets & classic tees under ₹1,000</p>
+        </div>
+      </div>
+      <div>
+        <div style="text-align:right;color:var(--muted);font-size:13px">Order on WhatsApp<br><strong id="phone">+91 8006115730</strong></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="left">
+        <h2 style="margin:0">Winter Drop — Limited Stock</h2>
+        <p style="margin:8px 0;color:var(--muted)">Classic denim jackets and plain black & white tees. Buy online or find us near college gates. Fast orders via WhatsApp.</p>
+        <div class="cta">
+          <button class="btn" onclick="scrollToShop()">Shop Now</button>
+          <button class="ghost" onclick="openWhatsAppPre('Hi Aman, I want to place an order')">Order on WhatsApp</button>
+        </div>
+      </div>
+      <div style="width:260px;text-align:center">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Best Seller</div>
+        <div style="border-radius:8px;padding:12px;background:#fff;box-shadow:0 8px 24px rgba(99,102,241,0.08)">
+          <div style="font-weight:800">Classic Denim Jacket</div>
+          <div style="color:var(--muted);margin-top:6px">Warm, durable — ₹899</div>
+        </div>
+      </div>
+    </section>
+
+    <main id="shop" class="grid" aria-live="polite">
+      <!-- Product: Denim Jacket -->
+      <div class="card" data-id="denim" data-name="Classic Denim Jacket" data-price="899">
+        <div class="img">Denim Jacket<br><small style="color:var(--muted)">Stylish winter denim</small></div>
+        <div class="meta"><div class="name">Classic Denim Jacket</div><div class="price">₹899</div></div>
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">Sizes: S, M, L, XL</div>
+        <div class="actions">
+          <select class="small size" aria-label="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+          <input class="small qty" type="number" value="1" min="1" style="width:70px" />
+          <button class="btn" onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product: Black Tee -->
+      <div class="card" data-id="blacktee" data-name="Black Cotton Tee" data-price="299">
+        <div class="img">Black T-Shirt<br><small style="color:var(--muted)">100% cotton</small></div>
+        <div class="meta"><div class="name">Black Cotton Tee</div><div class="price">₹299</div></div>
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">Sizes: S, M, L, XL</div>
+        <div class="actions">
+          <select class="small size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+          <input class="small qty" type="number" value="1" min="1" style="width:70px" />
+          <button class="btn" onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Product: White Tee -->
+      <div class="card" data-id="whitetee" data-name="White Cotton Tee" data-price="299">
+        <div class="img">White T-Shirt<br><small style="color:var(--muted)">Soft & breathable</small></div>
+        <div class="meta"><div class="name">White Cotton Tee</div><div class="price">₹299</div></div>
+        <div style="margin-top:8px;color:var(--muted);font-size:13px">Sizes: S, M, L, XL</div>
+        <div class="actions">
+          <select class="small size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+          <input class="small qty" type="number" value="1" min="1" style="width:70px" />
+          <button class="btn" onclick="addToCart(this)">Add to Cart</button>
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <div>
+        <strong>Pay via UPI (preferred)</strong>
+        <div style="font-size:13px;color:var(--muted)">UPI ID: aman@upi (set up later)</div>
+      </div>
+      <div class="cart-summary">
+        <div class="cart-count" id="cart-count">0</div>
+        <div style="text-align:right">
+          <div style="font-weight:700" id="cart-total">₹0</div>
+          <div style="font-size:12px;color:var(--muted)">Cart Total</div>
+        </div>
+        <div>
+          <button class="ghost" onclick="openWhatsAppCart()">Checkout on WhatsApp</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Replace with your WhatsApp number (country code +91)
+    const PHONE = '918006115730';
+
+    const cart = [];
+
+    function scrollToShop(){document.getElementById('shop').scrollIntoView({behavior:'smooth'})}
+
+    function addToCart(btn){
+      const card = btn.closest('.card');
+      const id = card.dataset.id;
+      const name = card.dataset.name;
+      const price = Number(card.dataset.price);
+      const size = card.querySelector('.size').value;
+      const qty = Number(card.querySelector('.qty').value) || 1;
+
+      // check if same item+size exists
+      const existing = cart.find(i=>i.id===id && i.size===size);
+      if(existing){ existing.qty += qty; }
+      else{ cart.push({id,name,price,size,qty}); }
+      updateCartUI();
+      btn.innerText = 'Added ✓';
+      setTimeout(()=>btn.innerText='Add to Cart',900);
+    }
+
+    function updateCartUI(){
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      const total = cart.reduce((s,i)=>s + i.price * i.qty,0);
+      document.getElementById('cart-count').innerText = count;
+      document.getElementById('cart-total').innerText = '₹' + total;
+    }
+
+    function openWhatsAppPre(msg){
+      const encoded = encodeURIComponent(msg);
+      window.open('https://wa.me/' + PHONE + '?text=' + encoded, '_blank');
+    }
+
+    function openWhatsAppCart(){
+      if(cart.length===0){ alert('Cart is empty. Add some items first.'); return; }
+      let msg = 'Hi Aman, I would like to order from AmanWear.%0A';
+      cart.forEach((it,idx)=>{
+        msg += `%0A${idx+1}. ${it.name} - Size: ${it.size} - Qty: ${it.qty} - ₹${it.price} each`;
+      });
+      const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+      msg += `%0A%0ATotal: ₹${total}%0ADelivery: [Your city/area]%0AName: [Your name]%0AContact: [Your phone]`;
+      window.open('https://wa.me/' + PHONE + '?text=' + msg, '_blank');
+    }
+
+    // friendly small improvement: persist cart in session
+    window.addEventListener('beforeunload', ()=>{
+      sessionStorage.setItem('aman_cart', JSON.stringify(cart));
+    });
+    window.addEventListener('load', ()=>{
+      try{
+        const saved = JSON.parse(sessionStorage.getItem('aman_cart')||'[]');
+        if(Array.isArray(saved) && saved.length){
+          saved.forEach(i=>cart.push(i)); updateCartUI();
+        }
+      }catch(e){}
+    });
+
+  </script>
+</body>
+</html>
